@@ -82,8 +82,8 @@ export function getClientSettings(): UserManagerSettings {
   return {
     authority: "https://techdevs-identityserver.azurewebsites.net",
     client_id: "spa",
-    redirect_uri: "http://localhost:8100/auth-callback",
-    post_logout_redirect_uri: "http://localhost:8100",
+    redirect_uri: "https://techdevs-dpmobile.netlify.com/auth-callback",
+    post_logout_redirect_uri: "https://techdevs-dpmobile.netlify.com",
     response_type: "id_token token",
     scope: "openid profile api1 techdevs-accounts-api",
     filterProtocolClaims: true,
