@@ -1,6 +1,5 @@
 {
-  "$schema":
-    "./node_modules/@angular-devkit/core/src/workspace/workspace-schema.json",
+  "$schema": "./node_modules/@angular-devkit/core/src/workspace/workspace-schema.json",
   "version": 1,
   "defaultProject": "app",
   "projects": {
@@ -21,7 +20,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "_redirects",
+              "src/_redirects",
               {
                 "glob": "**/*",
                 "input": "src/assets",
@@ -32,7 +31,11 @@
                 "input": "node_modules/@ionic/angular/dist/ionic/svg",
                 "output": "./svg"
               },
-              { "glob": "auth.html", "input": "./", "output": "./" }
+              {
+                "glob": "auth.html",
+                "input": "./",
+                "output": "./"
+              }
             ],
             "styles": [
               {
@@ -88,7 +91,9 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
-            "styles": ["styles.css"],
+            "styles": [
+              "styles.css"
+            ],
             "scripts": [],
             "assets": [
               {
@@ -107,8 +112,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "ionic-cordova-build": {
@@ -152,7 +162,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
