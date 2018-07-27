@@ -11,6 +11,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 import { AuthService } from "./services/auth.service";
+import { AuthGuardService } from "./services/auth-guard.service";
 
 @NgModule({
   declarations: [AppComponent, AuthCallbackComponent],
@@ -25,7 +26,8 @@ import { AuthService } from "./services/auth.service";
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AuthService
+    AuthService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

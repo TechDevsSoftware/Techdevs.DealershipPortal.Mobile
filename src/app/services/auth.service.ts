@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { UserManager, UserManagerSettings, User } from "oidc-client";
 import { Router } from "@angular/router";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { tap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: "root"
@@ -9,7 +11,10 @@ export class AuthService {
   private manager = new UserManager(getClientSettings());
   private user: User = null;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private httpClient: HttpClient
+  ) {
     this.manager.getUser().then(user => {
       this.user = user;
     });
@@ -27,8 +32,37 @@ export class AuthService {
   }
 
   logout() {
-    console.log("Logging out");
-    return this.manager.signoutRedirect();
+
+    this.manager.signoutRedirect()
+
+    // this.manager.createSignoutRequest().then(req => console.log(req.url));
+
+    // this.manager.createSignoutRequest().then(req => {
+    //   this.httpClient
+    //     .get(req.url, { responseType: 'text' as 'text' })
+    //     .subscribe(x => {
+    //       console.log("Logout processed");
+    //       this.clearUserState();
+    //       this.redirectHome();
+    //     });
+    // });
+  }
+
+  private clearUserState() {
+    this.user = null;
+    this.manager.clearStaleState();
+    this.eraseCookie("idsrv.session");
+  }
+  private eraseCookie(name) {
+    document.cookie = name + '=; Max-Age=-99999999;';
+  }
+
+  redirectHome() {
+    this.router.navigate(['/']);
+  }
+
+  redirectMyAccount() {
+    this.router.navigate(["/tabs", { outlets: { account: ['account'] } }]);
   }
 
   startAuthentication(): Promise<void> {
@@ -40,14 +74,13 @@ export class AuthService {
       console.log("Signin complete - calling redirect");
       console.log("User", user);
       this.user = user;
-      this.router.navigate(["/tabs", { outlets: { account: ['account'] } }]);
     });
   }
 }
 
 export function getClientSettings(): UserManagerSettings {
   return {
-    authority: "http://localhost:5000",
+    authority: "https://techdevs-identityserver.azurewebsites.net",
     client_id: "spa",
     redirect_uri: "http://localhost:8100/auth-callback",
     post_logout_redirect_uri: "http://localhost:8100",

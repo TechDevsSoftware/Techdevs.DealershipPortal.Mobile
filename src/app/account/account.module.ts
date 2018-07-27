@@ -27,8 +27,6 @@ const routes: Routes = [
     HttpClientModule
   ],
   declarations: [AccountPage],
-  providers : [
-    AuthGuardService, AuthService, TechdevsAccountService
-  ]
+  providers : [TechdevsAccountService]
 })
 export class AccountPageModule {}

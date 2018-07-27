@@ -13,7 +13,7 @@ export class TechdevsAccountService {
   }
 
   getUserProfile() {
-    return this.httpClient.get(`http://localhost:5001/api/v1/account`, {
+    return this.httpClient.get(`https://techdevs-usermanagement.azurewebsites.net/api/v1/account`, {
       headers: { Authorization: this.authService.getAuthorizationHeaderValue() }
     });
   }
