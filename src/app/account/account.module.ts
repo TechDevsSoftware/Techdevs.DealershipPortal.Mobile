@@ -6,6 +6,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { AccountPage } from './account.page';
+import { AuthGuardService } from '../services/auth-guard.service';
+import { AuthService } from '../services/auth.service';
+import { TechdevsAccountService } from '../services/techdevs-account.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -19,8 +23,12 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    HttpClientModule
   ],
-  declarations: [AccountPage]
+  declarations: [AccountPage],
+  providers : [
+    AuthGuardService, AuthService, TechdevsAccountService
+  ]
 })
 export class AccountPageModule {}

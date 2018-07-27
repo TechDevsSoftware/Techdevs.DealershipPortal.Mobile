@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>My Account</ion-title>
+    <ion-title>My Account - {{user?.firstName}} {{user?.lastName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,7 +12,7 @@
       Login
     </ion-item>
     
-    <ion-item>
+    <ion-item (click)="debug()">
       <ion-icon name='person' item-start></ion-icon>
       Personal Details
     </ion-item>
@@ -27,7 +27,7 @@
       Marketing Preferences
     </ion-item>
     
-    <ion-item>
+    <ion-item (click)="logout()">
       <ion-icon name='log-out' item-start></ion-icon>
       Logout
     </ion-item>

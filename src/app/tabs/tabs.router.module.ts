@@ -6,6 +6,7 @@ import { HomePage } from '../home/home.page';
 import { AboutPage } from '../about/about.page';
 import { ContactPage } from '../contact/contact.page';
 import { AccountPage } from '../account/account.page';
+import { AuthGuardService } from '../services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -30,7 +31,8 @@ const routes: Routes = [
       {
         path: 'account',
         outlet: 'account',
-        component: AccountPage
+        component: AccountPage,
+        canActivate: [AuthGuardService]
       }
     ]
   },

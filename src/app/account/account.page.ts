@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { AuthService } from "../services/auth.service";
+import { TechdevsAccountService } from "../services/techdevs-account.service";
 
 @Component({
   selector: "account",
@@ -7,36 +8,33 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
   styleUrls: ["./account.page.scss"]
 })
 export class AccountPage implements OnInit, OnDestroy {
- 
+  user: any;
   constructor(
-    public oidcSecurityService: OidcSecurityService
-  ) {
-    if (this.oidcSecurityService.moduleSetup) {
-      this.doCallbackLogicIfRequired();
-    } else {
-      this.oidcSecurityService.onModuleSetup.subscribe(() => {
-        this.doCallbackLogicIfRequired();
-      });
-    }
+    private authService: AuthService,
+    private accountService: TechdevsAccountService
+  ) {}
+
+  async ngOnInit() {
+    this.user = await this.accountService.getUserProfile().toPromise();
+    console.log(this.user);
   }
 
-  ngOnInit() {}
+  ngOnDestroy(): void {}
 
-  ngOnDestroy(): void {
-    this.oidcSecurityService.onModuleSetup.unsubscribe();
-  }
-
-  login() {
-    this.oidcSecurityService.authorize();
+  async login() {
+    this.authService.startAuthentication().then(async x => {
+      console.log("Logged In");
+    });
   }
 
   logout() {
-    this.oidcSecurityService.logoff();
+    this.authService.logout();
   }
 
-  private doCallbackLogicIfRequired() {
-    if (window.location.hash) {
-      this.oidcSecurityService.authorizedCallback();
-    }
+  debug() {
+    console.log({
+      isLoggedIn: this.authService.isLoggedIn(),
+      user: this.authService.getClaims()
+    });
   }
 }
