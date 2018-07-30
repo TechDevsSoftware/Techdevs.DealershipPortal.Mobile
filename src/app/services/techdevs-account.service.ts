@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { AuthService } from "./auth.service";
 import { UserVehicle, UserProfile } from "../models/app.models";
 import { Observable } from "rxjs";
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: "root"
@@ -14,7 +15,7 @@ export class TechdevsAccountService {
   ) {}
 
   getUserProfile(): Observable<UserProfile> {
-    return this.httpClient.get<UserProfile>(`http://localhost:5001/api/v1/account`, {
+    return this.httpClient.get<UserProfile>(`${environment.accountServer}/api/v1/account`, {
       headers: { Authorization: this.authService.getAuthorizationHeaderValue() }
     });
   }
@@ -24,7 +25,7 @@ export class TechdevsAccountService {
       headers: { Authorization: this.authService.getAuthorizationHeaderValue() }
     };
     return this.httpClient.post(
-      `http://localhost:5001/api/v1/account/myvehicles`,
+      `${environment.accountServer}/api/v1/account/myvehicles`,
       vehicle,
       options
     );
@@ -40,7 +41,7 @@ export class TechdevsAccountService {
       params: params
     };
     return this.httpClient.delete(
-      `http://localhost:5001/api/v1/account/myvehicles`,
+      `${environment.accountServer}/api/v1/account/myvehicles`,
       options
     );
   }
