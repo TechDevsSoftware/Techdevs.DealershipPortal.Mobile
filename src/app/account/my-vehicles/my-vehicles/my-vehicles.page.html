@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Vehicles</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="outer-content">
+
+  <ion-list>
+    <ion-item *ngFor="let v of vehicles" [routerLink]="['/account', 'my-vehicles', v.registration]">
+      <ion-avatar slot="start">
+        <img src="assets/images/car.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{v?.make}} {{v?.model}}</h2>
+        <h3>{{v.registration}} - {{v?.year}}</h3>
+        <!-- <p>Listen, I've had a pretty messed up day...</p> -->
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { AuthService } from "../services/auth.service";
 import { TechdevsAccountService } from "../services/techdevs-account.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "account",
@@ -11,7 +12,8 @@ export class AccountPage implements OnInit, OnDestroy {
   user: any;
   constructor(
     private authService: AuthService,
-    private accountService: TechdevsAccountService
+    private accountService: TechdevsAccountService,
+    private router: Router
   ) {}
 
   async ngOnInit() {

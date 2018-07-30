@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>My {{vehicle?.make}} {{vehicle?.model}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list *ngIf="vehicle && !loading">
+    <ion-item>
+      <ion-label color="primary">Registration</ion-label>
+      <ion-input placeholder="Vehicle registration" [(ngModel)]="vehicle.registration"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Make</ion-label>
+      <ion-input placeholder="Make" [(ngModel)]="vehicle.make"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Model</ion-label>
+      <ion-input placeholder="Model" [(ngModel)]="vehicle.model"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Year</ion-label>
+      <ion-input placeholder="Year" [(ngModel)]="vehicle.year"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

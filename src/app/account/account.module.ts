@@ -1,20 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { Routes, RouterModule } from "@angular/router";
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from "@ionic/angular";
 
-import { AccountPage } from './account.page';
-import { AuthGuardService } from '../services/auth-guard.service';
-import { AuthService } from '../services/auth.service';
-import { TechdevsAccountService } from '../services/techdevs-account.service';
-import { HttpClientModule } from '@angular/common/http';
+import { AccountPage } from "./account.page";
+import { TechdevsAccountService } from "../services/techdevs-account.service";
+import { HttpClientModule } from "@angular/common/http";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: AccountPage
+  },
+  {
+    path: "my-vehicles",
+    loadChildren: "./my-vehicles/my-vehicles.module#MyVehiclesModule"
   }
 ];
 
@@ -27,6 +29,6 @@ const routes: Routes = [
     HttpClientModule
   ],
   declarations: [AccountPage],
-  providers : [TechdevsAccountService]
+  providers: [TechdevsAccountService]
 })
 export class AccountPageModule {}

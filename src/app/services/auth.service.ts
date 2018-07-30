@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { UserManager, UserManagerSettings, User } from "oidc-client";
 import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { tap, map } from 'rxjs/operators';
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: "root"
@@ -12,7 +12,7 @@ export class AuthService {
   private user: User = null;
 
   constructor(
-    private router: Router,
+    private router: Router, 
     private httpClient: HttpClient
   ) {
     this.manager.getUser().then(user => {
@@ -25,27 +25,14 @@ export class AuthService {
   }
 
   getClaims(): any {
-    return (this.user) ? this.user.profile : null;
+    return this.user ? this.user.profile : null;
   }
   getAuthorizationHeaderValue(): string {
     return `${this.user.token_type} ${this.user.access_token}`;
   }
 
   logout() {
-
-    this.manager.signoutRedirect()
-
-    // this.manager.createSignoutRequest().then(req => console.log(req.url));
-
-    // this.manager.createSignoutRequest().then(req => {
-    //   this.httpClient
-    //     .get(req.url, { responseType: 'text' as 'text' })
-    //     .subscribe(x => {
-    //       console.log("Logout processed");
-    //       this.clearUserState();
-    //       this.redirectHome();
-    //     });
-    // });
+    this.manager.signoutRedirect();
   }
 
   private clearUserState() {
@@ -54,15 +41,15 @@ export class AuthService {
     this.eraseCookie("idsrv.session");
   }
   private eraseCookie(name) {
-    document.cookie = name + '=; Max-Age=-99999999;';
+    document.cookie = name + "=; Max-Age=-99999999;";
   }
 
   redirectHome() {
-    this.router.navigate(['/']);
+    this.router.navigate(["/"]);
   }
 
   redirectMyAccount() {
-    this.router.navigate(["/tabs", { outlets: { account: ['account'] } }]);
+    this.router.navigate(["/tabs", { outlets: { account: ["account"] } }]);
   }
 
   startAuthentication(): Promise<void> {
@@ -70,20 +57,27 @@ export class AuthService {
   }
 
   completeAuthentication(): Promise<void> {
+    window.location.hash = decodeURIComponent(window.location.hash);
     return this.manager.signinRedirectCallback().then(user => {
       console.log("Signin complete - calling redirect");
       console.log("User", user);
       this.user = user;
+      window.history.replaceState(
+        {},
+        window.document.title,
+        window.location.origin
+      );
+      this.redirectMyAccount();
     });
   }
 }
 
 export function getClientSettings(): UserManagerSettings {
   return {
-    authority: "https://techdevs-identityserver.azurewebsites.net",
-    client_id: "spa",
-    redirect_uri: "https://techdevs-dpmobile.netlify.com/auth-callback",
-    post_logout_redirect_uri: "https://techdevs-dpmobile.netlify.com",
+    authority: environment.identityServer,
+    client_id: environment.identityClientId,
+    redirect_uri: `${environment.clientAddress}/auth-callback`,
+    post_logout_redirect_uri: `${environment.clientAddress}`,
     response_type: "id_token token",
     scope: "openid profile api1 techdevs-accounts-api",
     filterProtocolClaims: true,

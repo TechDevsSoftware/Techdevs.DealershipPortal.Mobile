@@ -9,9 +9,9 @@ import { StatusBar } from "@ionic-native/status-bar/ngx";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 import { AuthService } from "./services/auth.service";
 import { AuthGuardService } from "./services/auth-guard.service";
+import { AuthCallbackComponent } from "./auth-callback/auth-callback.component";
 
 @NgModule({
   declarations: [AppComponent, AuthCallbackComponent],
@@ -20,7 +20,7 @@ import { AuthGuardService } from "./services/auth-guard.service";
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [
     StatusBar,
