@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>add-myvehicle</ion-title>
+    <ion-title>Add Vehicle</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,10 +11,34 @@
 
   <ion-item>
     <ion-label color="primary" floating>Registration</ion-label>
-    <ion-input></ion-input>
+    <ion-input [(ngModel)]="vehicle.registration"></ion-input>
   </ion-item>
 
+  <div *ngIf="showDetails">
 
-  <button ion-button block>Block Button</button>
+    <ion-item>
+      <ion-label color="primary" floating>Make</ion-label>
+      <ion-input [(ngModel)]="vehicle.make"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Model</ion-label>
+      <ion-input [(ngModel)]="vehicle.model"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Colour</ion-label>
+      <ion-input [(ngModel)]="vehicle.colour"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Fuel Type</ion-label>
+      <ion-input [(ngModel)]="vehicle.fuelType"></ion-input>
+    </ion-item>
+
+  </div>
+
+  <br>
+
+  <ion-button shape="round" color="primary" [disabled]="!vehicle.registration" (click)="searchReg()" *ngIf="!showDetails">Search Regisration</ion-button>
+  <br>
+  <ion-button shape="round" color="primary" (click)="addVehicle()" *ngIf="showDetails">Add Vehicle</ion-button>
 
 </ion-content>

@@ -17,4 +17,21 @@ export class UserVehicle {
   model: string;
   registration: string;
   year: number;
+  fuelType: string;
+  colour: string;
+  motResults: MOTResult[];
+
+  constructor() {
+    this.motResults = [];
+  }
+}
+
+export class MOTResult {
+  completedDate: string;
+  testResult: string;
+  expiryDate: string;
+  odometerValue: string;
+  odometerUnit: string;
+  odometerResultType: string;
+  motTestNumber: string;
 }

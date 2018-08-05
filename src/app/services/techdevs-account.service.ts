@@ -15,9 +15,14 @@ export class TechdevsAccountService {
   ) {}
 
   getUserProfile(): Observable<UserProfile> {
-    return this.httpClient.get<UserProfile>(`${environment.accountServer}/api/v1/account`, {
-      headers: { Authorization: this.authService.getAuthorizationHeaderValue() }
-    });
+    return this.httpClient.get<UserProfile>(
+      `${environment.accountServer}/api/v1/account`,
+      {
+        headers: {
+          Authorization: this.authService.getAuthorizationHeaderValue()
+        }
+      }
+    );
   }
 
   addMyVehicle(vehicle: UserVehicle) {
@@ -42,6 +47,20 @@ export class TechdevsAccountService {
     };
     return this.httpClient.delete(
       `${environment.accountServer}/api/v1/account/myvehicles`,
+      options
+    );
+  }
+
+  searchRegistration(registration: string) {
+    const params = new HttpParams().set("registration", registration);
+    const options = {
+      headers: {
+        Authorization: this.authService.getAuthorizationHeaderValue()
+      },
+      params: params
+    };
+    return this.httpClient.get<UserVehicle>(
+      `${environment.accountServer}/api/v1/account/myvehicles/lookup`,
       options
     );
   }

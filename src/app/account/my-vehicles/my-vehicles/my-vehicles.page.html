@@ -9,8 +9,15 @@
 
 <ion-content class="outer-content">
 
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="navToNewVehicle()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
   <ion-list>
-    <ion-item *ngFor="let v of vehicles" [routerLink]="['/account', 'my-vehicles', v.registration]">
+    <ion-item *ngFor="let v of vehicles" (click)="navToVehicle(v.registration)">
       <ion-avatar slot="start">
         <img src="assets/images/car.png">
       </ion-avatar>

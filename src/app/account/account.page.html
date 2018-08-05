@@ -18,7 +18,8 @@
     </ion-item>
     
     
-    <ion-item [routerLink]="['/account', 'my-vehicles']">
+    <!-- <ion-item [routerLink]="['/account', 'my-vehicles']"> -->
+    <ion-item (click)="navToVehicles()">
       <ion-icon name='car' item-start></ion-icon>
       My Vehicles
     </ion-item>

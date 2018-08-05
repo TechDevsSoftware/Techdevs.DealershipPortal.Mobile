@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { AuthService } from "../services/auth.service";
 import { TechdevsAccountService } from "../services/techdevs-account.service";
 import { Router } from "@angular/router";
+import { NavController } from "@ionic/angular";
 
 @Component({
   selector: "account",
@@ -13,7 +14,8 @@ export class AccountPage implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private accountService: TechdevsAccountService,
-    private router: Router
+    private router: Router,
+    private nav: NavController
   ) {}
 
   async ngOnInit() {
@@ -38,5 +40,9 @@ export class AccountPage implements OnInit, OnDestroy {
       isLoggedIn: this.authService.isLoggedIn(),
       user: this.authService.getClaims()
     });
+  }
+
+  navToVehicles() {
+    this.nav.goForward("/account/my-vehicles");
   }
 }
