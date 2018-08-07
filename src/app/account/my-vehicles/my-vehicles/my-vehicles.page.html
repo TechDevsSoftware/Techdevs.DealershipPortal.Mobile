@@ -32,7 +32,7 @@
     </ion-item>
   </ion-list> -->
 
-  <ion-card *ngFor="let v of vehicles">
+  <ion-card *ngFor="let v of vehicles" (click)="navToVehicle(v.registration)">
 
     <ion-card-content>
 
