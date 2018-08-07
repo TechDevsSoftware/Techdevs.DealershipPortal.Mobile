@@ -40,5 +40,6 @@
   <ion-button shape="round" color="primary" [disabled]="!vehicle.registration" (click)="searchReg()" *ngIf="!showDetails">Search Regisration</ion-button>
   <br>
   <ion-button shape="round" color="primary" (click)="addVehicle()" *ngIf="showDetails">Add Vehicle</ion-button>
+  <ion-button shape="round" color="primary" (click)="resetPage()" *ngIf="showDetails">Try Again</ion-button>
 
 </ion-content>

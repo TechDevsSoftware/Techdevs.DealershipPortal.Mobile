@@ -45,21 +45,28 @@ export class AddMyVehiclePage implements OnInit {
     const result = await this.accountService
       .searchRegistration(this.vehicle.registration)
       .toPromise();
+    console.log("Lookup vehicle result", result);
 
-    if (result == null) {
-      this.showMessage("Vehicle not found! Please enter your vehicle details").then();
+    if (result == null || !result.make) {
+      await this.showMessage(
+        "Vehicle not found! Please enter your vehicle details"
+      );
+    } else {
+      this.vehicle = result;
     }
     this.showDetails = true;
-    console.log("Lookup vehicle result", this.vehicle);
   }
 
   async addVehicle() {
     console.log("Adding Vehicle", this.vehicle);
     const result = await this.accountService
       .addMyVehicle(this.vehicle)
-      .toPromise();
-    this.nav.goForward("/account/my-vehicles");
-    console.log("New Vehicle", result);
+      .subscribe(res => {
+        this.nav.goForward("/account/my-vehicles");
+        console.log("New Vehicle", result);
+      }, async err => {
+        await this.showMessage("Vehicle could not be added");
+      });
   }
 
   async showMessage(message: string) {
