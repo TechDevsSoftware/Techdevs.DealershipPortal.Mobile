@@ -19,7 +19,7 @@
     </ion-fab-button>
   </ion-fab>
 
-
+  <!-- 
   <ion-list>
     <ion-item *ngFor="let v of vehicles" (click)="navToVehicle(v.registration)">
       <ion-avatar slot="start">
@@ -28,8 +28,31 @@
       <ion-label>
         <h2>{{v?.colour}} {{v?.make}} {{v?.model}}</h2>
         <h3>{{v.registration}} - {{v?.fuelType}}</h3>
-        <!-- <p>Listen, I've had a pretty messed up day...</p> -->
       </ion-label>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
+
+  <ion-card *ngFor="let v of vehicles">
+
+    <ion-card-content>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3">
+            <ion-img src="/assets/images/car.png" class="car-img"></ion-img>
+          </ion-col>
+          <ion-col size="9">
+            <h1>{{v?.make}} {{v?.model}}</h1>
+            <br>
+            <p>{{v?.registration}} - {{v.colour}} - {{v.fuelType}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+
+
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
