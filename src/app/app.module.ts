@@ -12,6 +12,8 @@ import { AppComponent } from "./app.component";
 import { AuthService } from "./services/auth.service";
 import { AuthGuardService } from "./services/auth-guard.service";
 import { AuthCallbackComponent } from "./auth-callback/auth-callback.component";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent, AuthCallbackComponent],
@@ -20,7 +22,8 @@ import { AuthCallbackComponent } from "./auth-callback/auth-callback.component";
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     StatusBar,
