@@ -18,7 +18,8 @@ const routes: Routes = [
   {
     path: "login-loading",
     loadChildren: "./login-loading/login-loading.module#LoginLoadingPageModule"
-  }
+  },
+  { path: 'privacy', loadChildren: './privacy/privacy.module#PrivacyPageModule' }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, {enableTracing: false, onSameUrlNavigation: 'reload'})],
